@@ -1,0 +1,36 @@
+{% set name = "aiocontextvars" %}
+{% set version = "0.2.2" %}
+{% set sha256 = "f027372dc48641f683c559f247bd84962becaacdc9ba711d583c3871fb5652aa" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+
+requirements:
+  host:
+    - python >=3.5,<3.7
+    - pip
+    - pytest-runner
+  run:
+    - python >=3.5,<3.7
+    - contextvars ==2.4
+
+test:
+  imports:
+    - contextvars
+
+about:
+  home: https://github.com/fantix/aiocontextvars
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Asyncio support for PEP-567 contextvars backport
